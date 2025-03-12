@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Hat - Hogwarts</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@100..900&display=swap">
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body class="bg-gray-900 text-white font-harrypotter">
+
+<section class="h-screen flex flex-col items-center justify-center">
+    <h1 class="text-5xl font-harrypotter text-yellow-400 animate-bounce">
+         You Belong In...
+    </h1>
+
+    <div class="mt-10 flex flex-col items-center justify-center">
+        <img src="<%= house.image %>" alt="<%= house.name %>" 
+            class="h-40 w-40 rounded-full shadow-lg">
+        <h2 class="text-4xl font-harrypotter mt-5 <%= house.color %>">
+            <%= house.name %>
+        </h2>
+        <p class="text-gray-400 text-lg mt-3">
+            "<%= house.traits %>"
+        </p>
+    </div>
+
+    <a href="/" class="mt-10">
+        <button class="bg-yellow-500 text-white px-6 py-3 rounded-lg text-xl font-title hover:bg-yellow-600 transition-all duration-300">
+             Return to Hogwarts
+        </button>
+    </a>
+</section>
+
+</body>
+</html>

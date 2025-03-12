@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter Characters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/output.css">
+</head>
+    <header>
+        <%- include('header') -%>
+    </header>
+<body class="bg-gray-800 text-white font-body">
+    <div class="potion-effect"></div> 
+    <h1 class="text-center py-5 text-4xl font-bold-text text-yellow-400 mt-20 font-harrypotter ">Harry Potter Characters</h1>
+    <div class="container grid grid-cols-1 md:grid-cols-3 gap-4 px-10 font-harrypotter">
+        <% if (characters.length > 0) { %>
+            <% characters.forEach(character => { %>
+                <div class="character-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                    <img class="character-img w-full h-60 object-contain rounded-lg      " 
+                        src="<%= character.attributes.image || '/images/missing.png' %>" alt="<%= character.attributes.name %>">
+                    <h3 class="text-xl font-bold mt-3">
+                        <strong>Name:</strong> <%= character.attributes.name %>
+                    </h3>
+                    <p><strong>Gender:</strong> <%= character.attributes.gender || 'Unknown' %></p>
+                    <p><strong>House:</strong> <%= character.attributes.house || "Unknown" %></p>
+                    <div class="flex justify-center">
+                        <a href="/characters/<%= character.id %>">
+                        <button class="view-btn  bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600">View Character</button>
+                    </a>
+                    </div>
+
+                </div>
+            <% }) %>
+        <% } else { %> 
+            <p>No characters available.</p>
+        <% } %>    
+    </div>
+    <div class="flex justify-center">
+        <button  id="load-more-btn" class="load-more text-center sl bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600" onclick="loadMore()">
+            Load more
+        </button>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

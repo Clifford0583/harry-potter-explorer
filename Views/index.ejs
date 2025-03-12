@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/output.css">
+    
+</head>
+<body class="bg-gray-800 text-white font-harrypotter bg-cover bg-center" 
+    style="background-image: url('/images/hogwarts.jpg');">
+    <%- include('partials/header') -%>
+    <div class="bg-black bg-opacity-50 min-h-screen flex flex-col items-center justify-center">
+        <h1 class="text-4xl text-yellow-500 font-bold">Welcome to Hogwarts</h1>
+        <p class="text-gray-300 mt-2">Begin your magical journey today.</p>
+        <a href="/sorting-hat" class="bg-yellow-500 text-black font-semibold px-6 py-3 mt-4 rounded-md hover:bg-yellow-600 transition duration-300">
+            Take the Sorting Hat Quiz
+        </a>
+       
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="bg-gray-900">
+    <%- include('header') -%>
+    <div class="container  text-white font-body">
+        <h1 class="text-center py-5 text-4xl font-bold-text text-yellow-400 mt-20 font-harrypotter ">Books</h1>
+        <div class="container grid grid-cols-1 md:grid-cols-3 gap-4 px-10 font-harrypotter">
+        <% if (bookInfo.length > 0) {%>
+            <% bookInfo.forEach(books => {%>
+                <div class="book-card bg-gray-800 p-5 rounded-lg shadow-lg">
+                    <img class="book-cover character-img w-full h-60 object-contain rounded-lg " src="<%= books.attributes.cover || 'missing.png' %>" alt="<%= books.cover %>" alt="">
+                    <h3 class="text-xl font-bold mt-3">
+                        <strong><%= books.attributes.title %></strong>
+                    </h3>
+                    <p> Date:<strong> <%= books.attributes.release_date %></strong></p>
+                    <p>Pages:<strong> <%= books.attributes.pages %></strong></p>
+                    <p>Author:<strong> <%= books.attributes.author %></strong></p>
+                    <div class="flex justify-center">
+                        <a href="%>">
+                            <button class="view-btn  bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600">View More</button>
+                        </a>
+                    </div>
+                </div>
+            <%}) %>
+            <% } else{ %>
+                <p>No Books available</p>
+                <% } %>
+        </div>
+    </div>
+</body>
+</html> 
