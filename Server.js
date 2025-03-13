@@ -25,10 +25,19 @@ app.get("/books", async (req, res) => {
 });
 
 app.get("/books/:id", async (req, res) => {
-  // next task dummy
   try {
-    const result = await axios.get();
-  } catch (error) {}
+    const result = await axios.get(`${API}/v1/books/${req.params.id}`);
+    const book = result.data.data;
+
+    // Extract chapters safely
+    const chapters = book.relationships?.chapters?.data || [];
+
+    // Pass both book and chapters to the EJS template
+    res.render("partials/bookInfo.ejs", { book, chapters });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(404).send("Book not found.");
+  }
 });
 
 //all character req
@@ -44,7 +53,18 @@ app.get("/characters", async (req, res) => {
     res.render("partials/allCharacter.ejs", { characters: [] });
   }
 });
-
+app.get("/characters/:id", async (req, res) => {
+  // view a specific or single character
+  try {
+    const characId = req.params.id;
+    const result = await axios.get(`${API}/v1/characters/${characId}`);
+    const character = result.data.data;
+    res.render("partials/characterInfo.ejs", { character });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(404).send("Character not found.");
+  }
+});
 app.get("/load-more", async (req, res) => {
   try {
     const page = Number(req.query.page) || 2; // Get page from query params
@@ -56,19 +76,6 @@ app.get("/load-more", async (req, res) => {
   } catch (error) {
     console.error("Error fetching data:", error);
     res.render({ characters: [] }); // Return empty array if error occurs
-  }
-});
-
-app.get("/characters/:id", async (req, res) => {
-  // view a specific or single character
-  try {
-    const characId = req.params.id;
-    const result = await axios.get(`${API}/v1/characters/${characId}`);
-    const character = result.data.data;
-    res.render("partials/characterInfo.ejs", { character });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(404).send("Character not found.");
   }
 });
 
