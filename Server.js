@@ -97,6 +97,7 @@ app.get("/spell", async (req, res) => {
 
 app.get("/sorting-hat", (req, res) => {
   //sorting hat game randomly select attributes to the user
+
   const houses = [
     {
       name: "Gryffindor",

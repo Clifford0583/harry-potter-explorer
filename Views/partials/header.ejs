@@ -6,23 +6,33 @@
     <title>Harry Potter Universe</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=Poppins:wght@100..900&family=Space+Grotesk:wght@300..700&family=Cinzel:wght@400..900&display=swap">
     <link rel="stylesheet" href="css/output.css">
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuButton = document.getElementById("menu-button");
+    const closeButton = document.getElementById("close-menu");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (menuButton && closeButton && mobileMenu) {
+        menuButton.addEventListener("click", () => {
+            mobileMenu.classList.remove("hidden");
+        });
+
+        closeButton.addEventListener("click", () => {
+            mobileMenu.classList.add("hidden");
+        });
+    }
+});
+  </script>
 </head>
 <body class="bg-gray-900 text-white font-title">
+  <div class="absolute inset-x-0 top-0 z-50">
+    <nav class="flex items-center justify-between p-6 lg:px-8 mt-5" aria-label="Global">
+        
+        <!-- Left empty div for spacing -->
+        <div class="flex flex-1"></div>  
 
-<div class="absolute inset-x-0 top-0 z-50 ">
-    <nav class="flex items-center justify-between p-6 lg:px8" aria-label="Global">
-        <div class="flex lg:flex-1">
-  
-          </div>
-          <div class="flex lg:hidden">
-            <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
-              <span class="sr-only">Open main menu</span>
-              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-            </button>
-          </div>
-          <div class="hidden lg:flex lg:gap-x-12">
+        <!-- Desktop Navigation (Centered) -->
+        <div class="hidden lg:flex flex-1 justify-center lg:gap-x-12">
             <a href="/" class="text-sm font-harrypotter text-yellow-500 hover:text-white hover:scale-110 transition duration-300">
                 Home
             </a>
@@ -39,11 +49,37 @@
                 Potions
             </a>
         </div>
-          <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" class="text-sm/6 font-semibold text-gray-900"></a>
-          </div>
+        <!-- Right empty div for spacing -->
+        <div class="hidden lg:flex flex-1"></div>          
+        
+        <!-- Mobile menu button (added id="menu-button") -->
+        <div class="flex lg:hidden">
+              <button id="menu-button" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                  <span class="sr-only">Open main menu</span>
+                  <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  </svg>
+              </button>
+          </div>  
     </nav>
-</div>
-
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden fixed inset-y-0 right-0 z-50 w-50 bg-gray-900 px-6 py-6 sm:ring-1 sm:ring-gray-900/10">
+          <div class="flex items-center justify-between">
+              <button id="close-menu" type="button" class="p-2.5 text-gray-700">
+                  <span class="sr-only">Close menu</span>
+                  <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+              </button>
+          </div>
+          <div class="mt-6 space-y-2">
+              <a href="/" class="block px-3 py-2 text-yellow-500 hover:bg-gray-700 rounded">Home</a>
+              <a href="/books" class="block px-3 py-2 text-yellow-500 hover:bg-gray-700 rounded">Books</a>
+              <a href="/characters" class="block px-3 py-2 text-yellow-500 hover:bg-gray-700 rounded">Characters</a>
+              <a href="/spell" class="block px-3 py-2 text-yellow-500 hover:bg-gray-700 rounded">Spells</a>
+              <a href="/potion" class="block px-3 py-2 text-yellow-500 hover:bg-gray-700 rounded">Potions</a>
+          </div>
+      </div>
+  </div>
 </body>
 </html>
