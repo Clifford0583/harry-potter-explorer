@@ -1,6 +1,5 @@
 import express from "express";
 import axios from "axios";
-import { title } from "process";
 
 const app = express();
 const port = 3000;
@@ -79,6 +78,48 @@ app.get("/load-more", async (req, res) => {
   }
 });
 
+app.get("/spell", async (req, res) => {
+  //load all spells
+  try {
+    const result = await axios.get(
+      API + "/v1/spells?page[size]=24&page[number]=1"
+    );
+    const spellData = result.data.data.map((spells) => spells.attributes);
+    res.render("partials/spells.ejs", { spellData, result });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.render("partials/potion.ejs", { spellData: [] });
+  }
+});
+
+app.get("/load-spell", async (req, res) => {
+  try {
+    //load more spells
+    const page = Number(req.query.page) || 2; // Get page from query params
+    const result = await axios.get(`${API}/v1/spells?page[number]=${page}`);
+
+    const spells = result.data.data;
+    res.json({ spells }); // Return spells as JSON
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.render({ spellInfo: [] }); // Return empty array if error occurs
+  }
+});
+app.get("/spells/:id", async (req, res) => {
+  //view a specific spell
+  try {
+    const spellId = req.params.id;
+    const result = await axios.get(`${API}/v1/spells/${spellId}`);
+    console.log("Fetching spell from:", API);
+
+    const spell = result.data.data;
+    res.render("partials/spellsInfo.ejs", { spell });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(404).send("Spell not found.");
+  }
+});
+
 //potion http req
 app.get("/potion", async (req, res) => {
   try {
@@ -90,16 +131,6 @@ app.get("/potion", async (req, res) => {
     res.render("partials/potion.ejs", { potionInfo: [] });
   }
   //res.render("partials/potion.ejs");
-});
-app.get("/spell", async (req, res) => {
-  try {
-    const result = await axios.get(API + "/v1/spells");
-    const spellInfo = result.data.data.map((spells) => spells.attributes);
-    res.render("partials/spells.ejs", { spellInfo, result });
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.render("partials/potion.ejs", { spellInfo: [] });
-  }
 });
 
 app.get("/sorting-hat", (req, res) => {

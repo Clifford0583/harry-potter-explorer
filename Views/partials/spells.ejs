@@ -15,9 +15,9 @@
     <body class="bg-gray-800 text-white font-body">
     <div class="spell"></div>
     <h1 class=" text-center py-5 text-4xl font-bold-text text-yellow-400 mt-20 font font-harrypotter">Spells</h1>
-    <div class="container grid grid-cols-1 md:grid-cols-3 gap-4 px-10 font-harrypotter">
-        <% if(spellInfo.length > 0){ %>
-            <% spellInfo.forEach(spells => {%>
+    <div class="container-spell grid grid-cols-1 md:grid-cols-3 gap-4 px-10 font-harrypotter">
+        <% if(spellData.length > 0){ %>
+            <% spellData.forEach(spells => {%>
                 <div class="spell-card bg bg-gray-800 p-5 rounded-lg shadow-lg">
                     <img class="spell-img w-full h-60 object-contain rounded-lg" src="<%= spells.image || '/images/missing.png' %>" alt="<%= spells.image %>" alt="">
                     <h3 class="text-1xl font-bold mt-3">
@@ -25,9 +25,11 @@
                     </h3>
                     <p><strong>Cathergory: </strong><%= spells.cathegory ? spells.cathegory: "Unknown" %></p>
                     <p><strong>Effect: </strong><%= spells.effect %></p>
-                    <a href="">
-                        <button class="view-btn  bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600">View Spell</button>
-                    </a>
+                        <a href="/spells/<%= spells.slug %>"> 
+                          <button class="view-btn bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600">
+                            View Spell
+                          </button>
+                        </a>    
                 </div>
            <% }); %>
             <% }else{ %>
@@ -35,7 +37,7 @@
                 <% } %>
     </div>
     <div class="flex justify-center">
-        <button  id="load-more-btn" class="load-more text-center sl bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600" onclick="loadMore()">
+        <button  id="load-spell-btn" class="load-more text-center sl bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600" onclick="loadSpells()">
             Load more
         </button>
 </body>

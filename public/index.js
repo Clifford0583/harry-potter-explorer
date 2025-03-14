@@ -24,7 +24,7 @@ async function loadMore() {
       return;
     }
 
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".container-page");
 
     // Append new characters dynamically
     data.characters.forEach((character) => {
@@ -63,3 +63,61 @@ async function loadMore() {
     console.error("Error loading more characters:", error);
   }
 }
+
+async function loadSpells() {
+  try {
+    currentPage++;
+    const response = await fetch("/load-spell?page=" + currentPage);
+    const data = await response.json();
+    const container = document.querySelector(".container-spell");
+
+    if (data.spells.length === 0) {
+      document.getElementById("load-spell-btn").style.display = "none";
+      return;
+    }
+    data.spells.forEach((spells) => {
+      const card = document.createElement("div");
+      card.className = "spell-card bg-gray-800 p-5 rounded-lg shadow-lg";
+      card.innerHTML = `
+        <img class="spell-img w-full h-60 object-contain rounded-lg" 
+             src="${spells.attributes.image || "/images/missing.png"}"
+             alt="${spells.attributes.name}">
+        <h3 class="text-xl font-bold mt-3"><strong>Name:</strong> ${
+          spells.attributes.name
+        }</h3>
+        <p><strong>Effect:</strong> ${spells.attributes.effect}</p>
+        <p><strong>Category:</strong> ${spells.attributes.category}</p>
+        <div class="flex justify-center">
+        <a href="/spell/${spells.id}">
+          <button class="view-btn bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600">
+            View More
+          </button>
+        </a>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+    if (window.tailwind) {
+      tailwind.config;
+    }
+  } catch (error) {
+    console.error("Error loading spells:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const menuButton = document.getElementById("menu-button");
+  const closeButton = document.getElementById("close-menu");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  if (menuButton && closeButton && mobileMenu) {
+    menuButton.addEventListener("click", () => {
+      mobileMenu.classList.remove("hidden");
+    });
+
+    closeButton.addEventListener("click", () => {
+      mobileMenu.classList.add("hidden");
+    });
+  }
+});

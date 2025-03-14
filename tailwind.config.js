@@ -1,17 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./views/**/*.ejs",
-    "./views/partials/**/*.ejs",
+    "./Views/**/*.ejs", // Ensure this includes your templates
+    "./Views/partials/**/*.ejs",
     "./public/**/*.js",
   ],
   theme: {
     extend: {
       fontFamily: {
-        harrypotter: ["Cinzel", "serif"], // Harry Potter Style Font
-        body: ["Poppins", "sans-serif"], // Clean Text Font
-        header: ["Geist", "sans-serif"], //  Professional Header Font
-        grotesk: ["Space Grotesk", "sans-serif"], //  Futuristic Font
+        harrypotter: ["Cinzel", "serif"], // Ensure font name matches Google Fonts
+        body: ["Poppins", "sans-serif"],
+        header: ["Geist", "sans-serif"], // Make sure "Geist" is available
       },
     },
   },
