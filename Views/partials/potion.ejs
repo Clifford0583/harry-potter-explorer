@@ -4,24 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/output.css">
 </head>
-<body>
+<body class="bg-gray-900 text-white font-body">
+    <header>
+        <%- include('header') -%>
+    </header>
     <div class="potion-effect"></div>
     <div class="spell"></div>
-    <h1>Potions</h1>
-    <div class="container">
+    <h1 class=" text-center py-5 text-4xl font-bold-text text-yellow-400 mt-20 font font-harrypotter">Potions</h1>
+    <div class="container-potion grid grid-cols-1 md:grid-cols-3 gap-4 px-10 font-harrypotter">
         <% if(potionInfo.length > 0){ %>
             <% potionInfo.forEach(potions => {%>
-                <div class="potion-card">
-                    <img class="potion-img" src="<%= potions.image || 'missing.png' %>" alt="<%= potions.image %>" alt="">
-                    <p><strong>Name: </strong><%= potions.name %></p>
-                    <p><strong>Effect: </strong><%= potions.effect %></p>
+                <div class="potion-card bg bg-gray-800 p-5 rounded-lg shadow-lg">
+                    <img class="potion-img w-full h-60 object-contain rounded-lg" src="<%= potions.image || 'images/missing.png' %>" alt="<%= potions.image %>" alt="">
+                    <h3 class="text-xl font-bold mt-3"><strong>Name: </strong><%= potions.name || 'Unknown' %> </h3>
+                    <p><strong>Effect:  </strong><%= potions.effect || 'Unknown' %></p>
+                    <p><strong>Difficulty:  </strong><%= potions.difficulty || 'Unknown' %></p>
+                    <p><strong>Color:  </strong><%= potions.characteristics || 'Unknown' %></p>
+                    <div class="flex justify-center">
+                        <a href="/potions/<%= potions.slug %>">
+                        <button class="view-btn  bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600">View Potion</button>
+                    </a>
+                    </div>
                 </div>
            <% }); %>
             <% }else{ %>
                 <p>No data available</p>
                 <% } %>
+    </div>
+    <div class="flex justify-center">
+        <button  id="load-potion-btn" class="load-more text-center sl bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600 "onclick="loadPotions()">
+            Load more
+        </button>
     </div>
 <script src=""></script>
 </body>
