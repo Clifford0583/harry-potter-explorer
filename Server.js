@@ -123,7 +123,9 @@ app.get("/spells/:id", async (req, res) => {
 //potion http req
 app.get("/potion", async (req, res) => {
   try {
-    const result = await axios.get(API + "/v1/potions");
+    const result = await axios.get(
+      API + "/v1/potions?page[size]=24&page[number]=1"
+    ); //load only 24 potions
     const potionInfo = result.data.data.map((potions) => potions.attributes);
     res.render("partials/potion.ejs", { potionInfo, result });
   } catch (error) {
@@ -131,6 +133,35 @@ app.get("/potion", async (req, res) => {
     res.render("partials/potion.ejs", { potionInfo: [] });
   }
   //res.render("partials/potion.ejs");
+});
+
+app.get("/load-potion", async (req, res) => {
+  try {
+    //load more potions
+    const page = Number(req.query.page) || 2; // Get page from query params
+    const result = await axios.get(`${API}/v1/potions?page[number]=${page}`);
+
+    const potions = result.data.data;
+    res.json({ potions }); // Return potions as JSON
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.render({ potionInfo: [] }); // Return empty array if error occurs
+  }
+});
+
+app.get("/potion/:id", async (req, res) => {
+  //view a specific potion
+  try {
+    const potionId = req.params.id;
+    const result = await axios.get(`${API}/v1/potions/${potionId}`);
+    console.log("Fetching potion from:", API);
+
+    const potion = result.data.data;
+    res.render("partials/potionInfo.ejs", { potion });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(404).send("Potion not found.");
+  }
 });
 
 app.get("/sorting-hat", (req, res) => {
