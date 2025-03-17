@@ -5,7 +5,8 @@
   "main": "Server.js",
   "type": "module",
   "scripts": {
-"start": "nodemon Server.js",
+"start": "node Server.js",
+  "dev": "nodemon Server.js",
   "build:css": "npx tailwindcss -i ./src/input.css -o ./public/output.css --watch"
   },
   "keywords": [],
