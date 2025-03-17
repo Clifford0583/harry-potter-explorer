@@ -5,8 +5,8 @@
   "main": "Server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"nodemon server.js\" \"npx tailwindcss -i public/css/style.css -o public/css/output.css --watch\""
+"start": "nodemon Server.js",
+  "build:css": "npx tailwindcss -i ./src/input.css -o ./public/output.css --watch"
   },
   "keywords": [],
   "author": "",
