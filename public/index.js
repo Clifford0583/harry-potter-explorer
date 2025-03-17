@@ -106,6 +106,48 @@ async function loadSpells() {
   }
 }
 
+async function loadPotions() {
+  try {
+    currentPage++;
+    const response = await fetch("/load-potion?page=" + currentPage);
+    const data = await response.json();
+    const container = document.querySelector(".container-potion");
+
+    if (data.potions.length === 0) {
+      document.getElementById("load-potion-btn").style.display = "none";
+      return;
+    }
+    data.potions.forEach((potions) => {
+      const card = document.createElement("div");
+      card.className = "potion-card bg-gray-800 p-5 rounded-lg shadow-lg";
+      card.innerHTML = `
+        <img class="potion-img w-full h-60 object-contain rounded-lg" 
+             src="${potions.attributes.image || "/images/missing.png"}"
+             alt="${potions.attributes.name}">
+        <h3 class="text-xl font-bold mt-3"><strong>Name:</strong> ${
+          potions.attributes.name
+        }</h3>
+        <p><strong>Effect:</strong> ${potions.attributes.effect}</p>
+        <p><strong>Category:</strong> ${potions.attributes.category}</p>
+        <div class="flex justify-center">
+        <a href="/potion/${potions.id}">
+          <button class="view-btn bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600">
+            View More
+          </button>
+        </a>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+    if (window.tailwind) {
+      tailwind.config;
+    }
+  } catch (error) {
+    console.error("Error loading potions:", error);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const menuButton = document.getElementById("menu-button");
   const closeButton = document.getElementById("close-menu");

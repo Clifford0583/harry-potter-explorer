@@ -20,6 +20,7 @@
             <% spellData.forEach(spells => {%>
                 <div class="spell-card bg bg-gray-800 p-5 rounded-lg shadow-lg">
                     <img class="spell-img w-full h-60 object-contain rounded-lg" src="<%= spells.image || '/images/missing.png' %>" alt="<%= spells.image %>" alt="">
+                    
                     <h3 class="text-1xl font-bold mt-3">
                         <strong>Name: </strong><%= spells.name %>
                     </h3>
@@ -40,5 +41,6 @@
         <button  id="load-spell-btn" class="load-more text-center sl bg-yellow-500 text-white px-4 py-2 rounded mt-4 hover:bg-yellow-600" onclick="loadSpells()">
             Load more
         </button>
+    </div>
 </body>
 </html>

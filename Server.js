@@ -149,7 +149,7 @@ app.get("/load-potion", async (req, res) => {
   }
 });
 
-app.get("/potion/:id", async (req, res) => {
+app.get("/potions/:id", async (req, res) => {
   //view a specific potion
   try {
     const potionId = req.params.id;
